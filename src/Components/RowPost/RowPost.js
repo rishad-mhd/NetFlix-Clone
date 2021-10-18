@@ -40,9 +40,11 @@ function RowPost(props) {
                 setUrlId(response.data.results[0])
             } else {
                 console.log('Array empty');
+                setUrlId("")
             }
         }).catch((err) => {
             console.log("Item not found");
+            setUrlId("")
         })
     }
     return (

@@ -20,6 +20,8 @@
     cursor: pointer;
     transition: .5s;
 }
+
+
 .smallPoster{
     max-height: 150px;
     margin-right: 10px;
