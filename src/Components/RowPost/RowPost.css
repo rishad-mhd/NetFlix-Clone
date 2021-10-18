@@ -18,15 +18,42 @@
     max-height: 250px;
     margin-right: 10px;
     cursor: pointer;
+    transition: .5s;
 }
 .smallPoster{
     max-height: 150px;
     margin-right: 10px;
     cursor: pointer;
+    transition: .5s;
 }
 .poster:hover{
     transform: scale(1.1);
 }
 .smallPoster:hover{
     transform: scale(1.1);
+}
+
+.show-more{
+    border: none;
+    background: transparent;
+    color: white;
+    min-width: 8em; 
+    cursor: pointer;
+    transition: .5s;
+}
+
+.show-more:hover{
+    background: grey;
+    transform: scale(1.1);
+
+}
+.youtube{
+    position: fixed;
+    z-index: 1;
+    margin-bottom: 5px;
+    width: auto;
+    height: 200px;
+    top: 200px;
+    width: 93%;
+    left: 3.5%;
 }

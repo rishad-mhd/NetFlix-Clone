@@ -9,8 +9,12 @@ function RowPost(props) {
     const [movies, setMovies] = useState([])
     const [urlId, setUrlId] = useState('')
     const [page, setPage] = useState(1)
+    const [play,setPlay] = useState(false)
     const handleClick = () => {
         setPage(page+1)
+    }
+    const close = ()=>{
+        setPlay(false)
     }
     useEffect(() => {
         axios.get(props.url + `&page=${page}`).then((response) => {
@@ -29,6 +33,7 @@ function RowPost(props) {
         }
     }
     const handleMovie = (id) => {
+        setPlay(true)
         console.log(id);
         axios.get(`/movie/${id}/videos?api_key=${API_KEY}&language=en-us`).then((response) => {
             if (response.data.results.length !== 0) {
@@ -50,9 +55,11 @@ function RowPost(props) {
                             <h4>{obj.name || obj.title}</h4>
                         </div>
                     )}
-                    <button onClick={handleClick}>Show More</button>
+                    <button className="show-more" onClick={handleClick}>Show More</button>
             </div>
-            {urlId && <YouTube opts={opts} videoId={urlId.key} />}
+            {urlId && play&& <div className='youtube'>
+                <YouTube opts={opts}  onEnd={close} onPause={close} videoId={urlId.key} />
+                </div>}
         </div>
     )
 }
