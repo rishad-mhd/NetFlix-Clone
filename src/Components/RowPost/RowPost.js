@@ -9,20 +9,20 @@ function RowPost(props) {
     const [movies, setMovies] = useState([])
     const [urlId, setUrlId] = useState('')
     const [page, setPage] = useState(1)
-    const [play,setPlay] = useState(false)
+    const [play, setPlay] = useState(false)
     const handleClick = () => {
-        setPage(page+1)
+        setPage(page + 1)
     }
-    const close = ()=>{
+    const close = () => {
         setPlay(false)
     }
     useEffect(() => {
         axios.get(props.url + `&page=${page}`).then((response) => {
-            console.log(response.data.results)
-            console.log(page);
+            // console.log(response.data.results)
+            // console.log(page);
             setMovies(movies.concat(response.data.results))
         }).catch((err) => {
-            alert('Network Error')
+            // alert('Network Error')
         })
     }, [page])
     const opts = {
@@ -51,17 +51,18 @@ function RowPost(props) {
         <div className='row'>
             <h2>{props.title}</h2>
             <div className="posters">
-                    {movies.map((obj) =>
-                        <div>
-                            <img onClick={() => { handleMovie(obj.id) }} className={props.isSmall ? 'smallPoster' : 'poster'} src={`${imageUrl + obj.backdrop_path}`} alt="poster" />
-                            <h4>{obj.name || obj.title}</h4>
-                        </div>
-                    )}
-                    <button className="show-more" onClick={handleClick}>Show More</button>
+                {movies.map((obj) =>
+                    <div>
+                        <img onClick={() => { handleMovie(obj.id) }} className={props.isSmall ? 'smallPoster loading' : 'poster loading'} src={`${imageUrl + obj.backdrop_path}`} alt="poster" />
+                        <h4>{obj.name || obj.title}</h4>
+                    </div>
+                )}
+                <button className="show-more" onClick={handleClick}>Show More</button>
             </div>
-            {urlId && play&& <div className='youtube'>
-                <YouTube opts={opts}  onEnd={close} onPause={close} videoId={urlId.key} />
-                </div>}
+            {urlId && play && <div className='youtube'>
+                <div className='yt-close' onClick={() => setUrlId(null)}><span>&#10005;</span></div>
+                <YouTube opts={opts} onEnd={close} videoId={urlId.key} />
+            </div>}
         </div>
     )
 }

@@ -53,7 +53,8 @@ function Banner() {
             </div>
             <div className="fade-bottom"></div>
             {urlId && play&& <div className='youtube'>
-                <YouTube opts={opts}  onEnd={close} onPause={close} onError={close} videoId={urlId.key} />
+            <div className='yt-close' onClick={() => setUrlId(null)}><span>&#10005;</span></div>
+                <YouTube opts={opts}  onEnd={close} onError={close} videoId={urlId.key} />
                 </div>}
         </div>
     )
